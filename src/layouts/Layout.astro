@@ -1,0 +1,110 @@
+---
+import '../styles/global.css';
+import Footer from '../components/Footer.astro';
+
+interface Props {
+  title: string;
+  description: string;
+}
+
+const { title, description } = Astro.props;
+---
+
+<!DOCTYPE html>
+<html lang="es" class="scroll-smooth">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    
+    <!-- Google Fonts: Inter & Montserrat -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Phosphor Icons -->
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+    
+    <!-- GSAP & ScrollTrigger -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" integrity="sha512-7eHRwcbYkK4d9g/6tD/mhkf++eoTHwpNM9woBxtPUBWm67zeAfFC+HrdoE2GanKeocly/VxeLvIqwvCdk7qScg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js" integrity="sha512-onMTRKJBKz8M1TnqqDuGBlowlH0ohFzMXYRNebz+yOcc5TQr/zAKsthzhuv0hiyUKEiQEQXEynnXCvNTOk50O2B" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  </head>
+  <body class="bg-lucerna-gray text-lucerna-blue font-inter min-h-screen flex flex-col antialiased">
+    
+    <!-- Navegación Premium con Glassmorphism -->
+    <nav class="sticky top-0 z-50 w-full bg-white/70 backdrop-blur-lg border-b border-gray-200/50 shadow-sm transition-all duration-300">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex justify-between items-center h-20">
+          <!-- Logo -->
+          <a href="/" class="flex-shrink-0 flex items-center gap-2 group">
+            <img src="/lucerna-logo.png" alt="Lucerna Energy Logo" class="h-12 w-auto group-hover:scale-105 transition-transform duration-300 drop-shadow-sm" style="filter: brightness(0) saturate(100%) invert(15%) sepia(45%) saturate(3500%) hue-rotate(190deg) brightness(95%) contrast(100%);" onerror="this.onerror=null; this.src='https://placehold.co/200x60/003366/FFFFFF?text=Lucerna+Energy&font=montserrat'" />
+          </a>
+          
+          <!-- Enlaces -->
+          <div class="hidden md:flex space-x-10 items-center">
+            <a href="#beneficios" class="font-medium text-lucerna-blue hover:text-lucerna-accent transition-colors duration-300">Beneficios</a>
+            <a href="#ingenieria" class="font-medium text-lucerna-blue hover:text-lucerna-accent transition-colors duration-300">Ingeniería</a>
+            <a href="#calculadora" class="font-medium text-lucerna-blue hover:text-lucerna-accent transition-colors duration-300">Calculadora</a>
+          </div>
+          
+          <!-- CTA -->
+          <div class="hidden md:flex items-center">
+            <a href="#cotizar" class="inline-flex items-center justify-center px-7 py-3 border border-transparent text-sm font-bold rounded-full text-lucerna-blue bg-lucerna-accent hover:bg-[length:200%_200%] hover:scale-[1.02] active:scale-95 transition-all duration-300 shadow-md hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-lucerna-accent">
+              Cotizar ahora
+            </a>
+          </div>
+
+          <!-- Mobile menu btn -->
+          <div class="flex items-center md:hidden">
+            <button type="button" class="text-lucerna-blue hover:text-lucerna-accent p-2 focus:outline-none transition-colors">
+              <i class="ph ph-list text-3xl"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="flex-grow">
+      <slot />
+    </main>
+
+    <!-- Footer Institucional -->
+    <Footer />
+
+    <!-- Lógica de Inicialización GSAP -->
+    <script is:inline>
+      document.addEventListener('DOMContentLoaded', () => {
+        // Validación de existencia de GSAP
+        if (typeof gsap !== 'undefined' && typeof ScrollTrigger !== 'undefined') {
+          gsap.registerPlugin(ScrollTrigger);
+
+          // Animación global para secciones
+          const sections = document.querySelectorAll('section');
+          sections.forEach((section) => {
+            gsap.fromTo(section, 
+              { opacity: 0, y: 30 },
+              { 
+                opacity: 1, 
+                y: 0, 
+                duration: 0.8, 
+                ease: "power2.out",
+                scrollTrigger: {
+                  trigger: section,
+                  start: "top 85%", // desencadena cuando el top de la sección llega al 85% de la ventana
+                  toggleActions: "play none none reverse"
+                }
+              }
+            );
+          });
+          
+          console.log('✅ Lucerna Energy Core Init: GSAP & ScrollTrigger listos.');
+        } else {
+          console.warn('⚠️ GSAP no cargado correctamente.');
+        }
+      });
+    </script>
+  </body>
+</html>
