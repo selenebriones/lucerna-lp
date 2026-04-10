@@ -13,7 +13,7 @@
         <!-- Info de Contacto (Columna Izquierda 4/12) -->
         <div class="flex flex-col gap-6 lg:col-span-4">
           <!-- Logo Color -->
-          <img src="/lucerna-logo.png" alt="Lucerna Energy Logo" class="h-16 w-auto object-contain object-left mb-2 opacity-90" style="filter: brightness(0) saturate(100%) invert(15%) sepia(45%) saturate(3500%) hue-rotate(190deg) brightness(95%) contrast(100%);" onerror="this.onerror=null; this.src='https://placehold.co/200x60/003366/FFFFFF?text=Lucerna+Energy&font=montserrat'" />
+          <img src="/lucerna-logo-n.png" alt="Lucerna Energy Logo" class="w-48 md:w-56 h-auto object-contain object-left mb-2 opacity-90" onerror="this.onerror=null; this.src='https://placehold.co/200x60/000000/FFFFFF?text=Lucerna+Energy&font=montserrat'" />
           <div>
             <h3 class="text-2xl font-montserrat font-bold text-lucerna-blue mb-2">Hablemos de energía</h3>
             <p class="font-inter text-gray-600 leading-relaxed text-sm">
@@ -26,13 +26,13 @@
                <i class="ph-duotone ph-map-pin text-2xl text-lucerna-accent shrink-0 mt-0.5"></i>
                <p>Av. Ricardo Margain 335,<br/>Valle del Campestre,<br/>San Pedro Garza García, N.L.</p>
             </div>
-            <a href="mailto:info@lucernaenergy.mx" class="flex items-center gap-3 hover:text-lucerna-accent transition-colors duration-300 group">
+            <a href="mailto:sales@lucernaenergy.com" class="flex items-center gap-3 hover:text-lucerna-accent transition-colors duration-300 group">
               <i class="ph-duotone ph-envelope text-2xl text-lucerna-accent group-hover:scale-110 transition-transform"></i>
-              info@lucernaenergy.mx
+              sales@lucernaenergy.com
             </a>
-            <a href="tel:+528123557991" class="flex items-center gap-3 hover:text-lucerna-accent transition-colors duration-300 group">
+            <a href="tel:8119990082" class="flex items-center gap-3 hover:text-lucerna-accent transition-colors duration-300 group">
               <i class="ph-duotone ph-phone text-2xl text-lucerna-accent group-hover:scale-110 transition-transform"></i>
-              81 2355 7991
+              81 1999 0082
             </a>
           </div>
         </div>
@@ -97,7 +97,42 @@
       <p>&copy; {new Date().getFullYear()} Lucerna Energy. Todos los derechos reservados.</p>
     </div>
   </div>
+
+  <!-- Botón Flotante WhatsApp -->
+  <a href="https://wa.me/528119990082?text=Hola,%20necesito%20más%20información" 
+     class="btn-whatsapp" 
+     target="_blank"
+     aria-label="Contáctanos por WhatsApp">
+      <i class="ph-fill ph-whatsapp-logo"></i>
+  </a>
 </footer>
+
+<style>
+  .btn-whatsapp {
+      position: fixed;
+      width: 60px;
+      height: 60px;
+      bottom: 60px;
+      right: 60px;
+      background-color: #25d366;
+      color: #FFF;
+      border-radius: 50px;
+      text-align: center;
+      font-size: 30px;
+      box-shadow: 2px 2px 3px #999;
+      z-index: 100;
+      text-decoration: none;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      transition: all 0.3s ease;
+  }
+
+  .btn-whatsapp:hover {
+      background-color: #128c7e;
+      transform: scale(1.1);
+  }
+</style>
 
 <script is:inline>
   document.addEventListener("DOMContentLoaded", () => {
