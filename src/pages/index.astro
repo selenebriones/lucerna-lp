@@ -195,13 +195,24 @@ import Layout from '../layouts/Layout.astro';
             <h2 class="text-3xl lg:text-5xl font-montserrat font-bold text-lucerna-blue mb-6 leading-tight">Proyecta tu Ahorro</h2>
             
             <label for="monto-recibo" class="block font-bold font-inter text-gray-600 mb-3 tracking-wide">
-              Monto promedio de tu recibo bimestral (MXN)
+              Monto promedio de tu recibo (MXN)
             </label>
             <div class="relative mb-8">
               <span class="absolute inset-y-0 left-0 flex items-center pl-6 text-lucerna-blue font-bold text-2xl">$</span>
               <input type="number" id="monto-recibo" placeholder="4500" class="w-full bg-white border-2 border-gray-100 text-lucerna-blue text-3xl font-bold font-montserrat rounded-[1.5rem] focus:ring-4 focus:ring-lucerna-accent/20 focus:border-lucerna-accent block pl-14 pr-6 py-6 outline-none transition-all shadow-inner" />
             </div>
             
+            <!-- Opciones de periodicidad de pago -->
+            <div class="flex gap-6 mb-8">
+              <label class="flex items-center gap-2 cursor-pointer group">
+                <input type="radio" name="periodo" value="mensual" class="w-5 h-5 text-lucerna-accent focus:ring-lucerna-accent border-gray-300">
+                <span class="text-gray-600 font-inter font-medium group-hover:text-lucerna-blue transition-colors">Pago Mensual</span>
+              </label>
+              <label class="flex items-center gap-2 cursor-pointer group">
+                <input type="radio" name="periodo" value="bimestral" value="bimestral" checked class="w-5 h-5 text-lucerna-accent focus:ring-lucerna-accent border-gray-300">
+                <span class="text-gray-600 font-inter font-medium group-hover:text-lucerna-blue transition-colors">Pago Bimestral</span>
+              </label>
+            </div>
             <button id="btn-calcular" class="w-full py-5 bg-lucerna-blue text-white text-lg font-bold rounded-full hover:bg-sky-900 transition-colors shadow-lg active:scale-[0.98]">
               Calcular Ahorro Potencial
             </button>
@@ -500,10 +511,12 @@ import Layout from '../layouts/Layout.astro';
 
       btnCalcular.addEventListener('click', () => {
         const monto = parseFloat(inputMonto.value);
+        const periodo = document.querySelector('input[name="periodo"]:checked').value;
         
         if (!isNaN(monto) && monto > 0) {
-          // Ahorro Anual = (Monto * 6) * 0.95
-          const ahorroAnual = (monto * 6) * 0.95;
+          // Si es mensual (x12 meses), si es bimestral (x6 bimestres)
+          const multiplicador = periodo === 'mensual' ? 12 : 6;
+          const ahorroAnual = (monto * multiplicador) * 0.95;
 
           // Toggle vistas del resultado
           containerVacio.style.display = 'none';
@@ -525,13 +538,13 @@ import Layout from '../layouts/Layout.astro';
             });
 
             // Animar números del ahorro
-            gsap.to(targetAhorro, {
-              innerHTML: Math.round(ahorroAnual),
+            let contador = { val: 0 };
+            gsap.to(contador, {
+              val: ahorroAnual,
               duration: 1.5,
               ease: "power2.out",
-              snap: { innerHTML: 1 },
               onUpdate: function() {
-                targetAhorro.innerHTML = Number(targetAhorro.innerHTML).toLocaleString('es-MX');
+                targetAhorro.innerHTML = Math.round(contador.val).toLocaleString('es-MX');
               }
             });
 
