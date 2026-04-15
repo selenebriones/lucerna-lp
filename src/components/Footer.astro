@@ -13,7 +13,7 @@
         <!-- Info de Contacto (Columna Izquierda 4/12) -->
         <div class="flex flex-col gap-6 lg:col-span-4">
           <!-- Logo Color -->
-          <img src="/lucerna-logo-n.png" alt="Lucerna Energy Logo" class="w-48 md:w-56 h-auto object-contain object-left mb-2 opacity-90" onerror="this.onerror=null; this.src='https://placehold.co/200x60/000000/FFFFFF?text=Lucerna+Energy&font=montserrat'" />
+          <img src="lucerna-logo-n.png\" alt="Lucerna Energy Logo" class="w-48 md:w-56 h-auto object-contain object-left mb-2 opacity-90" onerror="this.onerror=null; this.src='https://placehold.co/200x60/000000/FFFFFF?text=Lucerna+Energy&font=montserrat'" />
           <div>
             <h3 class="text-2xl font-montserrat font-bold text-lucerna-blue mb-2">Hablemos de energía</h3>
             <p class="font-inter text-gray-600 leading-relaxed text-sm">
@@ -101,7 +101,7 @@
   <!-- Chatbot Script -->
   <script src="https://conversia.com.mx/assets/js/chatbot.js" id="chatbot-js"></script>
   <!-- Limpiar CSS del chatbot -->
-  <link rel="stylesheet" href="/chatbot-clean.css">
+  <link rel="stylesheet" href="chatbot-clean.css\">
 
   <script is:inline>
       // Destruir el CSS problemático sin importar cómo y cuándo se inyecte
@@ -181,7 +181,7 @@
 
       // === ENVIO AJAX PHP ===
       try {
-        const response = await fetch('/sendmail.php', {
+        const response = await fetch('/paneles-solares-residenciales/sendmail.php', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json'
@@ -193,7 +193,7 @@
         if (response.ok) {
           // Exito! Limpiamos e inyectamos redicción suave. En Localhost no envia mail a menos q configures postfix
           form.reset();
-          window.location.href = "/gracias";
+          window.location.href = "/paneles-solares-residenciales/gracias";
         } else {
           // Ha ocurrido un error en php (por ejemplo funcion mail() dio false en localhost)
           alert("ocurrió un error y que intente de nuevo.");
